@@ -18,14 +18,15 @@ local mytextclock = wibox.widget.textclock(
     markup("#de5e1e", " %H:%M ")
 )
 
-mytextclock.font = 'Terminus 8'
+mytextclock.font = 'Ubuntu 8'
 
 lain.widget.cal({
     attach_to = { mytextclock },
     notification_preset = {
-        font = "Terminus 8",
+        font = mytextclock.font,
         fg   = '#aaaaaa',
-        bg   = '#050505dd'
+        bg   = '#050505dd',
+        -- position = "top_middle",
     }
 })
 
