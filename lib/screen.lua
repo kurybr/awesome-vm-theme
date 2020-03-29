@@ -8,29 +8,34 @@ local awful         = require("awful")
 local beautiful     = require("beautiful")
 local gears         = require("gears")
 local lain          = require("lain")
-local dpi   = require("beautiful.xresources").apply_dpi
+local dpi           = require("beautiful.xresources").apply_dpi
 
 local theme_path = string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME"))
 
-local function set_wallpaper(s)
+local function set_wallpaper(screen)
     -- Wallpaper
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen
         if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
+            wallpaper = wallpaper(screen)
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
+
+        gears.wallpaper.maximized(
+            wallpaper,
+            screen,
+            true
+        )
     end
 end
 
-local function set_arrange(s)
-    local only_one = #s.tiled_clients == 1
-    for _, c in pairs(s.clients) do
-        if only_one and not c.floating or c.maximized then
-            c.border_width = 0
+local function set_arrange(_screen)
+    local only_one = #_screen.tiled_clients == 1
+    for _, client in pairs(_screen.clients) do
+        if only_one and not client.floating or client.maximized then
+            client.border_width = 0
         else
-            c.border_width = beautiful.border_width
+            client.border_width = beautiful.border_width
         end
     end
 end
@@ -50,4 +55,4 @@ beautiful.init(theme_path)
 screen.connect_signal("property::geometry", set_wallpaper)
 screen.connect_signal("arrange", set_arrange)
 
-awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
+awful.screen.connect_for_each_screen(function(_screen) beautiful.at_screen_connect(_screen) end)

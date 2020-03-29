@@ -1,11 +1,19 @@
 local os = os
 local dpi   = require("beautiful.xresources").apply_dpi
 
-
 local theme = { }
 
 theme.dir = os.getenv('HOME') .. '/.config/awesome/theme'
-theme.wallpaper = theme.dir .. '/wall.png'
+
+theme.wallpapers =
+{
+	theme.dir .. "/wall.png",
+	theme.dir .. "/wall2.jpg"
+}
+
+theme.wallpaper = function( _screen )
+	return theme.wallpapers[ _screen.index ]
+end
 
 theme.font                                      = "Ubuntu 8"
 

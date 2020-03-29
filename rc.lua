@@ -19,6 +19,7 @@ end
 
 run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
 
+require('lib.menu')
 require('lib.keyboard')
 require('lib.screen')
 require('lib.events')

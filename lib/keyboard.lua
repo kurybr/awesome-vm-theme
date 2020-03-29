@@ -4,46 +4,18 @@ local awesome, client, screen = awesome, client, screen
 
 local awful         = require('awful')
 local gears         = require("gears")
-local freedesktop   = require("freedesktop")
 
-local hotkeys_popup = require("awful.hotkeys_popup").widget
-                      require("awful.hotkeys_popup.keys")
-
-local beautiful     = require("beautiful")
 local dpi           = require("beautiful.xresources").apply_dpi
 
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local variables = require('lib.variables')
 local globalkeys = variables.globalkeys
-local terminal = variables.terminal
-local editor = variables.editor
+
 local modkey = variables.modkey
 
 -- {{{ Menu
-local myawesomemenu = {
-    { "hotkeys", function() return false, hotkeys_popup.show_help end },
-    { "manual", terminal .. " -e man awesome" },
-    { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-    { "restart", awesome.restart },
-    { "quit", function() awesome.quit() end }
-}
 
-local games = {
-    { 'Tibia', os.getenv('HOME') .. '/.bin/tibia/Tibia'}
-}
-
-awful.util.mymainmenu = freedesktop.menu.build({
-    icon_size = beautiful.menu_height or dpi(16),
-    before = {
-        { "Awesome", myawesomemenu, beautiful.awesome_icon },
-        { 'Games', games }
-        -- other triads can be put here
-    },
-    after = {
-        -- other triads can be put here
-    }
-})
 
 awful.util.taglist_buttons = my_table.join(
     awful.button({ }, 1, function(t) t:view_only() end),

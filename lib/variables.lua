@@ -22,8 +22,6 @@ local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
 local browser      = os.getenv("BROWSER") or "firefox"
 local scrlocker    = "slock"
 
-
-
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 
