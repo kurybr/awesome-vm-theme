@@ -8,7 +8,7 @@ local gears         = require("gears")
 local lain          = require("lain")
 local dpi   = require("beautiful.xresources").apply_dpi
 
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "kurybr")
+local theme_path = string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME"))
 
 local function set_wallpaper(s)
     -- Wallpaper
