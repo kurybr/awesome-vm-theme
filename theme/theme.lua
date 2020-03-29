@@ -140,6 +140,7 @@ function theme.at_screen_connect(_screen)
                            awful.button({}, 4, function () awful.layout.inc( 1) end),
                            awful.button({}, 5, function () awful.layout.inc(-1) end)))
 
+
 	-- Load Tag screen
 	_screen.mytaglist = awful.widget.taglist(
 		_screen,
