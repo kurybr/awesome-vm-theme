@@ -1,3 +1,5 @@
+-- luacheck: ignore screen awesome client root
+
 local awesome, client, screen = awesome, client, screen
 
 local awful         = require('awful')

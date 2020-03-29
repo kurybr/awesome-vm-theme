@@ -1,3 +1,4 @@
+-- luacheck: ignore awesome
 
 -- request global variables
 local awesome  = awesome

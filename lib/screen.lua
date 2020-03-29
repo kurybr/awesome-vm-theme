@@ -1,3 +1,5 @@
+-- luacheck: ignore screen
+
 local screen = screen
 
 local awful         = require("awful")
