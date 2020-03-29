@@ -10,7 +10,7 @@ local lain = require('lain')
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- dependences
 
-
+local func = require('lib.functions')
 
 
 local modkey       = "Mod4" -- super
@@ -33,16 +33,12 @@ local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local globalkeys = my_table.join(
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end,
-              {description = "take a screenshot", group = "hotkeys"}),
-
+    awful.key({ altkey }, "p", function() os.execute("flameshot gui") end, { description = "take a screenshot", group = "hotkeys"}),
     -- X screen locker
-    awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
-              {description = "lock screen", group = "hotkeys"}),
-
+    awful.key({ modkey, }, "l", function () os.execute(scrlocker) end, { description = "lock screen", group = "hotkeys" }),
     -- Hotkeys
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description = "show help", group="awesome"}),
+    awful.key({ modkey, }, "s",      hotkeys_popup.show_help, { description = "show help", group="awesome"}),
+
     -- Tag browsing
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -339,37 +335,17 @@ local globalkeys = my_table.join(
 )
 
 local clientkeys = my_table.join(
-    awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
-              {description = "magnify client", group = "client"}),
-    awful.key({ modkey,           }, "f",
-        function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end,
-        {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
-              {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
-              {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-              {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-              {description = "toggle keep on top", group = "client"}),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "maximize", group = "client"})
+    awful.key({ altkey, "Shift"   }, "m", lain.util.magnify_client, {description = "magnify client", group = "client"}),
+    awful.key({ modkey,           }, "f", func.setFullscreen, { description = "toggle fullscreen", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "c", func.close_window, {description = "close", group = "client"}),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle , { description = "toggle floating", group = "client" }),
+
+    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end, {description = "move to master", group = "client"}),
+
+    awful.key({ modkey, }, "o", func.toggleScreen, { description = "move to screen", group = "client"}),
+    awful.key({ modkey, }, "t", func.fixTop,       { description = "toggle keep on top", group = "client"}),
+    awful.key({ modkey, }, "n", func.setMinimize , { description = "minimize", group = "client" }),
+    awful.key({ modkey, }, "m", func.setMaximize , { description = "maximize", group = "client" })
 )
 
 

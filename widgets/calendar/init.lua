@@ -11,7 +11,7 @@ os.setlocale(os.getenv("LANG")) -- to localize the clock
 
 local clockicon = wibox.widget.imagebox('./clock.png' )
 local mytextclock = wibox.widget.textclock(
-    markup("#7788af", "%A %d %B ")
+    markup("#7788af", " %A %d %B ")
     ..
     markup("#ab7367", ">")
     ..

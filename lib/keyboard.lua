@@ -5,8 +5,10 @@ local awesome, client, screen = awesome, client, screen
 local awful         = require('awful')
 local gears         = require("gears")
 local freedesktop   = require("freedesktop")
+
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-					  require("awful.hotkeys_popup.keys")
+                      require("awful.hotkeys_popup.keys")
+
 local beautiful     = require("beautiful")
 local dpi           = require("beautiful.xresources").apply_dpi
 
@@ -27,14 +29,18 @@ local myawesomemenu = {
     { "quit", function() awesome.quit() end }
 }
 
+local games = {
+    { 'Tibia', os.getenv('HOME') .. '/.bin/tibia/Tibia'}
+}
+
 awful.util.mymainmenu = freedesktop.menu.build({
     icon_size = beautiful.menu_height or dpi(16),
     before = {
         { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        { 'Games', games }
         -- other triads can be put here
     },
     after = {
-        { "Open terminal", terminal },
         -- other triads can be put here
     }
 })
@@ -154,10 +160,19 @@ for i = 1, 9 do
 end
 
 
+-- Mapping buttons and actions of mouse.
+local Mouse = {
+    rightButton = 1,
+    middleButton = 2,
+    leftButton = 3,
+    scrollFront = 4,
+    scrollBack = 5
+}
+
 root.buttons(my_table.join(
-    awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, Mouse.leftButton, function () awful.util.mymainmenu:toggle() end),
+    awful.button({ }, Mouse.scrollFront, awful.tag.viewnext),
+    awful.button({ }, Mouse.scrollBack, awful.tag.viewprev)
 ))
 
 root.keys( globalkeys )
